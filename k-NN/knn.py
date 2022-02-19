@@ -1,8 +1,12 @@
-import numpy as np
+import os
 from math import floor
 
+import numpy as np
+
+# !wget http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+
 FOLD_DEGREE = 4
-DATA_PATH = "/home/abs/PycharmProjects/VisualRecognition_lab/cifar-10-batches-py/"
+DATA_PATH = "./cifar-10-batches-py/"
 METRIC = 1
 
 
@@ -21,7 +25,7 @@ def reduce_data(data):
 
 def read_test_data(directory_name):
     dict = {}
-    dict_data = unpickle(directory_name + "test_batch")
+    dict_data = unpickle(os.path.join(directory_name, "test_batch"))
     dict['imgs'] = np.array(dict_data[b'data'], dtype=np.int32)
     dict['labels'] = np.array(dict_data[b'labels']).reshape(len(dict_data[b'labels']), 1)
     return dict
